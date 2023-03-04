@@ -74,6 +74,23 @@ export const getBycategory = async (req: Request, res: Response) => {
         console.log(error);
       }
     };
+
+
+    export const getByRate = async (req: Request, res: Response) => {
+      try {
+          const  {rating}  = req.body;
+          const movieName = await prisma.movie.findMany({
+            where:{
+              rating:{
+                gt:rating
+              },
+            }
+          });
+          res.json(movieName);
+        } catch (error) {
+          console.log(error);
+        }
+      };
   export const deleteOneMovie = async (req: Request, res: Response) => {
 
     try {
